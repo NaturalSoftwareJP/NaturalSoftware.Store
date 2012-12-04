@@ -119,6 +119,9 @@
     <None Include="NaturalSoftware.Store.Test_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\license-trial.xml" />
+    <Content Include="Data\Recipes.txt" />
+    <Content Include="Data\license-full.xml" />
     <Content Include="Images\UnitTestLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

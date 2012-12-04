@@ -8,7 +8,18 @@ namespace NaturalSoftware.Store
     /// </summary>
     public static class AppLicense
     {
-        /// <summary>C:\Users\Kaoru\Documents\GitHub\NaturalSoftware.Store\NaturalSoftware.Store\NaturalSoftware.Store\AppLicense.cs
+        static AppLicense()
+        {
+#if DEBUG
+            LicenseInformation = CurrentAppSimulator.LicenseInformation;
+            IsSimulator = true;
+#else
+            LicenseInformation = CurrentApp.LicenseInformation;
+            IsSimulator = false;
+#endif
+        }
+
+        /// <summary>
         /// シミュレーターかどうか
         /// </summary>
         public static bool IsSimulator
@@ -26,15 +37,26 @@ namespace NaturalSoftware.Store
             private set;
         }
 
-        static AppLicense()
+        /// <summary>
+        /// 試用版
+        /// </summary>
+        public static bool IsTrial
         {
-#if DEBUG
-            LicenseInformation = CurrentAppSimulator.LicenseInformation;
-            IsSimulator = true;
-#else
-            LicenseInformation = CurrentApp.LicenseInformation;
-            IsSimulator = false;
-#endif
+            get
+            {
+                return LicenseInformation.IsActive && LicenseInformation.IsTrial;
+            }
+        }
+
+        /// <summary>
+        /// 購入版
+        /// </summary>
+        public static bool IsFull
+        {
+            get
+            {
+                return LicenseInformation.IsActive && !LicenseInformation.IsTrial;
+            }
         }
     }
 }
