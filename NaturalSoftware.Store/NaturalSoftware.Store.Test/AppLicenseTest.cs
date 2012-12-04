@@ -15,6 +15,13 @@ namespace NaturalSoftware.Store.Test
 
         /// <summary>
         /// シミュレーターをリロードする
+        /// 
+        /// コードサンプル
+        ///  Windows 8 ハンズオン ラボ
+        ///  http://msdn.microsoft.com/ja-JP/windows/apps/jj674832
+        /// 
+        /// XMLファイルの仕様
+        /// http://msdn.microsoft.com/ja-jp/library/windows/apps/windows.applicationmodel.store.currentappsimulator.aspx
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>

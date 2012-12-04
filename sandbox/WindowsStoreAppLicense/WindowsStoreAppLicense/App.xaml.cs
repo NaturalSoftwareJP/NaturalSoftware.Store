@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -39,9 +40,11 @@ namespace WindowsStoreAppLicense
         /// 検索結果やその他の情報を表示するために使用されます。
         /// </summary>
         /// <param name="args">起動要求とプロセスの詳細を表示します。</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
             Frame rootFrame = Window.Current.Content as Frame;
+
+            await ReloadSimulatorAsync( @"Data\license-full.xml" );
 
             // ウィンドウに既にコンテンツが表示されている場合は、アプリケーションの初期化を繰り返さずに、
             // ウィンドウがアクティブであることだけを確認してください
@@ -85,6 +88,24 @@ namespace WindowsStoreAppLicense
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: アプリケーションの状態を保存してバックグラウンドの動作があれば停止します
             deferral.Complete();
+        }
+
+        /// <summary>
+        /// シミュレーターをリロードする
+        /// 
+        /// コードサンプル
+        ///  Windows 8 ハンズオン ラボ
+        ///  http://msdn.microsoft.com/ja-JP/windows/apps/jj674832
+        /// 
+        /// XMLファイルの仕様
+        /// http://msdn.microsoft.com/ja-jp/library/windows/apps/windows.applicationmodel.store.currentappsimulator.aspx
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static async Task ReloadSimulatorAsync( string fileName )
+        {
+            var file = await Package.Current.InstalledLocation.GetFileAsync( fileName );
+            await Windows.ApplicationModel.Store.CurrentAppSimulator.ReloadSimulatorAsync( file );
         }
     }
 }

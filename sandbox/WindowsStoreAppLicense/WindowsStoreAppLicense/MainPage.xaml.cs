@@ -4,7 +4,6 @@
 // アプリ内購入をサポートする方法 (Windows)
 // http://msdn.microsoft.com/ja-jp/library/windows/apps/hh694067.aspx
 using System;
-using NaturalSoftware.Store;
 using Windows.ApplicationModel.Store;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -31,7 +30,7 @@ namespace WindowsStoreAppLicense
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // アプリの実行中にライセンスが変更されたときに通知を受け取るイベント ハンドラーを追加
-            AppLicense.LicenseInformation.LicenseChanged += LicenseInformation_LicenseChanged;
+            CurrentAppSimulator.LicenseInformation.LicenseChanged += LicenseInformation_LicenseChanged;
             ReloadLicense();
         }
 
@@ -45,31 +44,54 @@ namespace WindowsStoreAppLicense
         // WindowsStoreProxy.xml のありか
         //  C:\Users\<ユーザー名>\AppData\Local\Packages\<パッケージファミリ名>\LocalState\Microsoft\Windows Store\ApiData
         // アプリケーションのパッケージファミリ名は Package.appxmanifest の 「パッケージ化｜パッケージファミリ名」にあります
-        private void ReloadLicense()
+        private async void ReloadLicense()
         {
-            // ライセンスがアクティブである
-            if ( AppLicense.LicenseInformation.IsActive ) {
-                // 試用版
-                if ( AppLicense.LicenseInformation.IsTrial ) {
-                    textLicense.Text = "試用版";
+            await Dispatcher.RunAsync( Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                // ライセンスがアクティブである
+                if ( CurrentAppSimulator.LicenseInformation.IsActive ) {
+                    // 試用版
+                    if ( CurrentAppSimulator.LicenseInformation.IsTrial ) {
+                        textLicense.Text = "試用版";
 
-                    var longDateFormat = new Windows.Globalization.DateTimeFormatting.DateTimeFormatter( "longdate" );
+                        var longDateFormat = new Windows.Globalization.DateTimeFormatting.DateTimeFormatter( "longdate" );
 
-                    // Display the expiration date using the DateTimeFormatter. 
-                    // For example, longDateFormat.Format(licenseInformation.ExpirationDate)
-                    // 残りの試用期間
-                    var daysRemaining = (AppLicense.LicenseInformation.ExpirationDate - DateTime.Now).Days;
+                        // 残りの試用期間
+                        var daysRemaining = (CurrentAppSimulator.LicenseInformation.ExpirationDate - DateTime.Now).Days;
 
-                    // Let the user know the number of days remaining before the feature expires
-                    textRemainDays.Text = daysRemaining.ToString();
+                        // Let the user know the number of days remaining before the feature expires
+                        textRemainDays.Text = daysRemaining.ToString();
+                    }
+                    // 通常版
+                    else {
+                        textLicense.Text = "購入版";
+                    }
+
+                    textAddContentsLicense.Text = CurrentAppSimulator.LicenseInformation.ProductLicenses["AddContents"].IsActive ? "有効" : "無効";
                 }
-                // 通常版
+                // ライセンスがアクティブではない(何かしら不正な状況)
                 else {
-                    textLicense.Text = "購入版";
+                }
+            } );
+        }
+
+        private async void Button_Click_1( object sender, Windows.UI.Xaml.RoutedEventArgs e )
+        {
+            if ( !CurrentAppSimulator.LicenseInformation.ProductLicenses["AddContents"].IsActive ) {
+                try {
+                    // The customer doesn't own this feature, so 
+                    // show the purchase dialog.
+
+                    await CurrentAppSimulator.RequestProductPurchaseAsync( "AddContents", false );
+                    // the in-app purchase was successful
+                }
+                catch ( Exception ) {
+                    // The in-app purchase was not completed because 
+                    // an error occurred.
                 }
             }
-            // ライセンスがアクティブではない(何かしら不正な状況)
             else {
+                // The customer already owns this feature.
             }
         }
     }
