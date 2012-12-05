@@ -1,0 +1,20 @@
+﻿<Page
+    x:Class="Advertising.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Advertising"
+    xmlns:AD="using:Microsoft.Advertising.WinRT.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <AD:AdControl x:Name="adForFull"
+              ApplicationId="d25517cb-12d4-4699-8bdc-52040c712cab"
+              AdUnitId="10042998"
+              Width="728"
+              Height="90"
+              VerticalAlignment="Bottom"
+              Grid.Row="1" />
+    </Grid>
+</Page>
