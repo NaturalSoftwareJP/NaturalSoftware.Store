@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsStoreAppLicense", "WindowsStoreAppLicense\WindowsStoreAppLicense.csproj", "{F7C21D06-5C6D-4E62-B85A-345572C0ADC7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LicenseInformationTest", "LicenseInformationTest\LicenseInformationTest.csproj", "{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,30 @@ Global
 		{F7C21D06-5C6D-4E62-B85A-345572C0ADC7}.Release|x86.ActiveCfg = Release|x86
 		{F7C21D06-5C6D-4E62-B85A-345572C0ADC7}.Release|x86.Build.0 = Release|x86
 		{F7C21D06-5C6D-4E62-B85A-345572C0ADC7}.Release|x86.Deploy.0 = Release|x86
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Debug|ARM.Build.0 = Debug|ARM
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Debug|ARM.Deploy.0 = Debug|ARM
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Debug|x64.ActiveCfg = Debug|x64
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Debug|x64.Build.0 = Debug|x64
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Debug|x64.Deploy.0 = Debug|x64
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Debug|x86.ActiveCfg = Debug|x86
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Debug|x86.Build.0 = Debug|x86
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Debug|x86.Deploy.0 = Debug|x86
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Release|ARM.ActiveCfg = Release|ARM
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Release|ARM.Build.0 = Release|ARM
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Release|ARM.Deploy.0 = Release|ARM
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Release|x64.ActiveCfg = Release|x64
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Release|x64.Build.0 = Release|x64
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Release|x64.Deploy.0 = Release|x64
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Release|x86.ActiveCfg = Release|x86
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Release|x86.Build.0 = Release|x86
+		{F52309AF-7EFA-49F0-92EC-1F1C75F25AFE}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

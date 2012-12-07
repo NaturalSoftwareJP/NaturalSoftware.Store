@@ -77,21 +77,16 @@ namespace WindowsStoreAppLicense
 
         private async void Button_Click_1( object sender, Windows.UI.Xaml.RoutedEventArgs e )
         {
+            // アプリ内課金：未
             if ( !CurrentAppSimulator.LicenseInformation.ProductLicenses["AddContents"].IsActive ) {
                 try {
-                    // The customer doesn't own this feature, so 
-                    // show the purchase dialog.
-
                     await CurrentAppSimulator.RequestProductPurchaseAsync( "AddContents", false );
-                    // the in-app purchase was successful
                 }
                 catch ( Exception ) {
-                    // The in-app purchase was not completed because 
-                    // an error occurred.
                 }
             }
+            // アプリ内課金：済
             else {
-                // The customer already owns this feature.
             }
         }
     }
