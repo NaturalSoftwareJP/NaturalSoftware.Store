@@ -117,7 +117,7 @@ namespace SensorStoreApp
                 orientationSensor.ReadingChanged += MainPage_ReadingChanged;
             }
             else {
-                //Text.Text = @"方位センサーはありません";
+                TextOrientation.Text = @"方位センサーはありません";
             }
 
             // 簡易方位センサー
@@ -126,7 +126,7 @@ namespace SensorStoreApp
                 simpleOrientationSensor.OrientationChanged += MainPage_OrientationChanged;
             }
             else {
-                //TextLight.Text = @"簡易方位センサーはありません";
+                TextSimpleOrientation.Text = @"簡易方位センサーはありません";
             }
 
             // コンパス
@@ -160,12 +160,19 @@ namespace SensorStoreApp
             } );
         }
 
-        void MainPage_OrientationChanged( SimpleOrientationSensor sender, SimpleOrientationSensorOrientationChangedEventArgs args )
+        async void MainPage_OrientationChanged( SimpleOrientationSensor sender, SimpleOrientationSensorOrientationChangedEventArgs args )
         {
+            await Dispatcher.RunAsync( CoreDispatcherPriority.Normal, () =>
+            {
+                TextSimpleOrientation.Text = "SimpleOrientation : " +  args.Orientation.ToString();
+            } );
         }
 
-        void MainPage_ReadingChanged( OrientationSensor sender, OrientationSensorReadingChangedEventArgs args )
+        async void MainPage_ReadingChanged( OrientationSensor sender, OrientationSensorReadingChangedEventArgs args )
         {
+            await Dispatcher.RunAsync( CoreDispatcherPriority.Normal, () =>
+            {
+            } );
         }
 
         async void MainPage_ReadingChanged( Inclinometer sender, InclinometerReadingChangedEventArgs args )
