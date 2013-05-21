@@ -90,7 +90,7 @@ namespace SensorStoreApp
                 accelerometer.Shaken += MainPage_Shaken;
             }
             else {
-                TextLight.Text = @"加速度センサーはありません";
+                TextAccelerometer.Text = @"加速度センサーはありません";
             }
 
             // ジャイロメーター
@@ -99,7 +99,7 @@ namespace SensorStoreApp
                 gyrometer.ReadingChanged += MainPage_ReadingChanged;
             }
             else {
-                TextLight.Text = @"ジャイロメーターはありません";
+                TextGyrometer.Text = @"ジャイロメーターはありません";
             }
 
             // 傾斜センサー
@@ -108,7 +108,7 @@ namespace SensorStoreApp
                 inclinometer.ReadingChanged += MainPage_ReadingChanged;
             }
             else {
-                TextLight.Text = @"傾斜センサーはありません";
+                TextInclinometer.Text = @"傾斜センサーはありません";
             }
 
             // 方位センサー
@@ -117,7 +117,7 @@ namespace SensorStoreApp
                 orientationSensor.ReadingChanged += MainPage_ReadingChanged;
             }
             else {
-                TextLight.Text = @"方位センサーはありません";
+                //Text.Text = @"方位センサーはありません";
             }
 
             // 簡易方位センサー
@@ -126,16 +126,16 @@ namespace SensorStoreApp
                 simpleOrientationSensor.OrientationChanged += MainPage_OrientationChanged;
             }
             else {
-                TextLight.Text = @"簡易方位センサーはありません";
+                //TextLight.Text = @"簡易方位センサーはありません";
             }
 
             // コンパス
             compass = Compass.GetDefault();
-            if ( simpleOrientationSensor != null ) {
+            if ( compass != null ) {
                 compass.ReadingChanged += MainPage_ReadingChanged;
             }
             else {
-                TextLight.Text = @"コンパスはありません";
+                TextCompass.Text = @"コンパスはありません";
             }
 
             //try {
