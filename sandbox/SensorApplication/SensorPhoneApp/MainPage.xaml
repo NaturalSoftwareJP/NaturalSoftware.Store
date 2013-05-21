@@ -49,6 +49,7 @@
             <StackPanel Orientation="Vertical">
                 <TextBlock x:Name="TextAccelerometer" Text="Accelerometer" FontSize="20" />
                 <TextBlock x:Name="TextInclinometer" Text="Inclinometer" FontSize="20" />
+                <TextBlock x:Name="TextOrientation" Text="OrientationSensor" FontSize="20" />
                 <TextBlock x:Name="TextCompass" Text="Compass" FontSize="20" />
                 <TextBlock x:Name="TextGyrometer" Text="Gyrometer" FontSize="20" />
                 <!--<TextBlock x:Name="TextGeolocation" Text="Geolocation" />-->

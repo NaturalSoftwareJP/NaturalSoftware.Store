@@ -77,7 +77,7 @@ namespace SensorPhoneApp
                 orientationSensor.ReadingChanged += MainPage_ReadingChanged;
             }
             else {
-                //Text.Text = @"方位センサーはありません";
+                TextOrientation.Text = @"方位センサーはありません";
             }
 
             // コンパス
