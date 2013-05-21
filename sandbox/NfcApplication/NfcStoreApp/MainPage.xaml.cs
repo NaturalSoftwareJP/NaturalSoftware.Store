@@ -30,12 +30,15 @@ namespace NfcStoreApp
 
         ProximityDevice proximityDevice = null;
 
+        long subscribeId = -1;
+        long publishId = -1;
+
         /// <summary>
         /// このページがフレームに表示されるときに呼び出されます。
         /// </summary>
         /// <param name="e">このページにどのように到達したかを説明するイベント データ。Parameter 
         /// プロパティは、通常、ページを構成するために使用します。</param>
-        async protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             try {
 
@@ -80,7 +83,9 @@ namespace NfcStoreApp
         private void ButtonSend_Click( object sender, RoutedEventArgs e )
         {
             if ( proximityDevice != null ) {
-                var id = proximityDevice.PublishMessage( "Windows.SampleMessageType", TextSendMessage.Text, MessageTransmittedHandler );
+                StopPublishingMessage();
+
+                publishId = proximityDevice.PublishMessage( "Windows.SampleMessageType", TextSendMessage.Text, MessageTransmittedHandler );
                 TextMessage.Text = @"Message Transmitting!!";
             }
         }
@@ -89,6 +94,8 @@ namespace NfcStoreApp
         {
             await Dispatcher.RunAsync( Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
+                StopPublishingMessage();
+
                 TextMessage.Text = @"Message Transmitted!!";
             } );
         }
@@ -96,7 +103,10 @@ namespace NfcStoreApp
         private void ButtonRecieve_Click( object sender, RoutedEventArgs e )
         {
             if ( proximityDevice != null ) {
-                proximityDevice.SubscribeForMessage( "Windows.SampleMessageType", MessageReceivedHandler );
+                StopSubscribingForMessage();
+
+                subscribeId = proximityDevice.SubscribeForMessage( "Windows.SampleMessageType", MessageReceivedHandler );
+                TextMessage.Text = string.Format( @"SubscribeForMessage:{0}", subscribeId );
             }
         }
 
@@ -104,9 +114,27 @@ namespace NfcStoreApp
         {
             await Dispatcher.RunAsync( Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
+                StopSubscribingForMessage();
+
                 TextMessage.Text = @"Message Received!!";
                 TextRecieveMessage.Text = message.DataAsString;
             } );
+        }
+
+        private void StopPublishingMessage()
+        {
+            if ( publishId != -1 ) {
+                proximityDevice.StopPublishingMessage( publishId );
+                publishId = -1;
+            }
+        }
+
+        private void StopSubscribingForMessage()
+        {
+            if ( subscribeId != -1 ) {
+                proximityDevice.StopSubscribingForMessage( subscribeId );
+                subscribeId = -1;
+            }
         }
     }
 }

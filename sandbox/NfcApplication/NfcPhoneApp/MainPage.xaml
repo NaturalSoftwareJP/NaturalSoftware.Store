@@ -41,8 +41,7 @@
 
         <!--TitlePanel は、アプリケーション名とページ タイトルを格納します-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="マイ アプリケーション" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="ページ名" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="NFCサンプル" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
         </StackPanel>
 
         <!--ContentPanel - 追加コンテンツをここに入力します-->

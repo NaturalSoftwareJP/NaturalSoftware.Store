@@ -25,6 +25,9 @@ namespace NfcPhoneApp
 
         ProximityDevice proximityDevice = null;
 
+        long subscribeId = -1;
+        long publishId = -1;
+
         protected override void OnNavigatedTo( NavigationEventArgs e )
         {
             base.OnNavigatedTo( e );
@@ -38,8 +41,7 @@ namespace NfcPhoneApp
                     throw new Exception( "NFCデバイスが見つかりません" );
                 }
 
-                var d  =ProximityDevice.GetDeviceSelector();
-
+                // デバイスの認識、消失イベント
                 proximityDevice.DeviceArrived += proximityDevice_DeviceArrived;
                 proximityDevice.DeviceDeparted += proximityDevice_DeviceDeparted;
 
@@ -52,6 +54,7 @@ namespace NfcPhoneApp
             }
         }
 
+        // デバイスが離れた
         void proximityDevice_DeviceDeparted( ProximityDevice sender )
         {
             Dispatcher.BeginInvoke( new Action( () =>
@@ -60,6 +63,7 @@ namespace NfcPhoneApp
             } ));
         }
 
+        // デバイスを認識した
         void proximityDevice_DeviceArrived( ProximityDevice sender )
         {
             Dispatcher.BeginInvoke( new Action( () =>
@@ -73,6 +77,7 @@ namespace NfcPhoneApp
             if ( proximityDevice != null ) {
                 StopPublishingMessage();
 
+                // メッセージを送る
                 proximityDevice.PublishMessage( "Windows.SampleMessageType", TextSendMessage.Text, MessageTransmittedHandler );
             }
         }
@@ -80,7 +85,7 @@ namespace NfcPhoneApp
         private void StopPublishingMessage()
         {
             if ( publishId != -1 ) {
-                //proximityDevice.StopPublishingMessage( publishId );
+                proximityDevice.StopPublishingMessage( publishId );
                 publishId = -1;
             }
         }
@@ -95,14 +100,12 @@ namespace NfcPhoneApp
             } ) );
         }
 
-        long subscribeId = -1;
-        long publishId = -1;
-
         private void ButtonRecieve_Click( object sender, RoutedEventArgs e )
         {
             if ( proximityDevice != null ) {
                 StopSubscribingForMessage();
 
+                // メッセージを受ける
                 subscribeId = proximityDevice.SubscribeForMessage( "Windows.SampleMessageType", MessageReceivedHandler );
 
                 TextMessage.Text = string.Format( @"SubscribeForMessage:{0}", subscribeId );
@@ -112,7 +115,7 @@ namespace NfcPhoneApp
         private void StopSubscribingForMessage()
         {
             if ( subscribeId != -1 ) {
-                //proximityDevice.StopSubscribingForMessage( subscribeId );
+                proximityDevice.StopSubscribingForMessage( subscribeId );
                 subscribeId = -1;
             }
         }
