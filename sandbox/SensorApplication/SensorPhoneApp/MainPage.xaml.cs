@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using SensorPhoneApp.Resources;
+using Windows.Devices.Geolocation;
 using Windows.Devices.Sensors;
 
 namespace SensorPhoneApp
@@ -49,6 +50,8 @@ namespace SensorPhoneApp
             get;
             set;
         }
+
+        Geolocator geo = new Geolocator();
 
         protected override void OnNavigatedTo( NavigationEventArgs e )
         {
@@ -101,6 +104,26 @@ namespace SensorPhoneApp
             catch ( Exception ) {
                 TextGyrometer.Text = @"ジャイロメーターはありません";
             }
+
+            try {
+                geo.DesiredAccuracy = PositionAccuracy.High;
+
+                // http://benjaminbaldacci.com/blog/?p=249
+                geo.MovementThreshold = 10;
+                geo.PositionChanged += geo_PositionChanged;
+            }
+            catch ( Exception ex ) {
+                TextGeolocation.Text = ex.Message;
+            }
+        }
+
+        void geo_PositionChanged( Geolocator sender, PositionChangedEventArgs args )
+        {
+            Dispatcher.BeginInvoke( new Action( () =>
+            {
+                TextGeolocation.Text = string.Format( @"Geolocation:{0} {1} {2}",
+                    args.Position.Coordinate.Latitude, args.Position.Coordinate.Longitude, args.Position.Coordinate.Accuracy );
+            } ) );
         }
 
         void MainPage_ReadingChanged( Compass sender, CompassReadingChangedEventArgs args )
@@ -129,7 +152,10 @@ namespace SensorPhoneApp
         {
             Dispatcher.BeginInvoke( new Action( () =>
             {
-                TextGyrometer.Text = string.Format( @"Gyrometer : X={0} Y={1} Z={2}", args.Reading.AngularVelocityX.ToString(), args.Reading.AngularVelocityY.ToString(), args.Reading.AngularVelocityZ.ToString() );
+                TextGyrometer.Text = string.Format( @"Gyrometer : X={0} Y={1} Z={2}",
+                    args.Reading.AngularVelocityX.ToString(),
+                    args.Reading.AngularVelocityY.ToString(),
+                    args.Reading.AngularVelocityZ.ToString() );
             } ) );
         }
 

@@ -187,7 +187,10 @@ namespace SensorStoreApp
         {
             await Dispatcher.RunAsync( CoreDispatcherPriority.Normal, () =>
             {
-                TextGyrometer.Text = string.Format( @"Gyrometer : X={0} Y={1} Z={2}", args.Reading.AngularVelocityX.ToString(), args.Reading.AngularVelocityY.ToString(), args.Reading.AngularVelocityZ.ToString() );
+                TextGyrometer.Text = string.Format( @"Gyrometer : X={0} Y={1} Z={2}",
+                    args.Reading.AngularVelocityX.ToString(),
+                    args.Reading.AngularVelocityY.ToString(),
+                    args.Reading.AngularVelocityZ.ToString() );
             } );
         }
 

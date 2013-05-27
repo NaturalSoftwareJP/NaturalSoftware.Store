@@ -52,7 +52,7 @@
                 <TextBlock x:Name="TextOrientation" Text="OrientationSensor" FontSize="20" />
                 <TextBlock x:Name="TextCompass" Text="Compass" FontSize="20" />
                 <TextBlock x:Name="TextGyrometer" Text="Gyrometer" FontSize="20" />
-                <!--<TextBlock x:Name="TextGeolocation" Text="Geolocation" />-->
+                <TextBlock x:Name="TextGeolocation" Text="Geolocation" />
             </StackPanel>
         </Grid>
 
